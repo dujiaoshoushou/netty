@@ -317,7 +317,15 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     final ChannelFuture initAndRegister() {
         Channel channel = null;
         try {
+            /**
+             * 通过serverGroup的channel函数设置 NioServerSocketChannel类
+             * {@link io.netty.channel.socket.nio.NioServerSocketChannel}，并实例化。
+             * 基于 NIO 选择器的实现来接受新连接.实例化NioServerSocketChannel（对于ServerSocketChannel的包装）
+             */
             channel = channelFactory.newChannel();
+            /**
+             * 初始化channel
+             */
             init(channel);
         } catch (Throwable t) {
             if (channel != null) {
